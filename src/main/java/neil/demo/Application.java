@@ -1,9 +1,12 @@
 package neil.demo;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 
 import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
@@ -34,10 +37,12 @@ public class Application {
 		HazelcastInstance hazelcastInstance = HazelcastClient.newHazelcastClient(clientConfig);
 
     	System.out.println("START ------------" + new Date());
-
+    	System.out.println("Input: " + Objects.toString(input));
+    	File file = new File(input);
+    	
         try (BufferedReader bufferedReader =
                 new BufferedReader(
-                        new InputStreamReader(Application.class.getClassLoader().getResourceAsStream(input)))) {
+                        new InputStreamReader(new FileInputStream(file)))) {
         	String line;
         	int count = 0;
         	while ((line = bufferedReader.readLine()) != null) {
