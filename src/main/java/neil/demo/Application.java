@@ -16,6 +16,7 @@ public class Application {
 	private static final String MY_NAME = "tuesa";
 
 	public static void main(String[] args) throws Exception {
+		
 		String input = System.getProperty("MY_INPUT");
 
 		ClientConfig clientConfig = new ClientConfig();
@@ -47,8 +48,8 @@ public class Application {
         	int count = 0;
         	while ((line = bufferedReader.readLine()) != null) {
             	String[] tokens = line.split(" ");
-            	String mapName = tokens[1];
-            	String key = tokens[2];
+            	String mapName = "tues";
+            	String key = tokens[1] + "-" + tokens[2];
             	String value = tokens[3];
 
             	if (count % 100 == 0) {
