@@ -18,6 +18,7 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		
 		String input = System.getProperty("MY_INPUT");
+		String style = System.getProperty("MY_STYLE", "A");
 
 		ClientConfig clientConfig = new ClientConfig();
 
@@ -48,8 +49,15 @@ public class Application {
         	int count = 0;
         	while ((line = bufferedReader.readLine()) != null) {
             	String[] tokens = line.split(" ");
-            	String mapName = "tues";
-            	String key = tokens[1] + "-" + tokens[2];
+            	String mapName = null;
+            	String key = null;
+            	if (style.equals("A")) {
+                	mapName = "tues";
+                	key = tokens[1] + "-" + tokens[2];
+            	} else {
+                	mapName = tokens[1];
+                	key = tokens[2];
+            	}
             	String value = tokens[3];
 
             	if (count % 100 == 0) {
