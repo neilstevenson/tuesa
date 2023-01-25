@@ -18,7 +18,7 @@ public class Application {
 	public static void main(String[] args) throws Exception {
 		
 		String input = System.getProperty("MY_INPUT");
-		String style = System.getProperty("MY_STYLE", "A");
+		String mapNameDefault = System.getProperty("MY_MAP_NAME", "");
 
 		ClientConfig clientConfig = new ClientConfig();
 
@@ -39,7 +39,8 @@ public class Application {
 		HazelcastInstance hazelcastInstance = HazelcastClient.newHazelcastClient(clientConfig);
 
     	System.out.println("START ------------" + new Date());
-    	System.out.println("Input: " + Objects.toString(input));
+    	System.out.println("Input: '" + Objects.toString(input) + "'");
+    	System.out.println("MapName: '" + Objects.toString(mapNameDefault) + "'");
     	File file = new File(input);
     	
         try (BufferedReader bufferedReader =
@@ -51,17 +52,17 @@ public class Application {
             	String[] tokens = line.split(" ");
             	String mapName = null;
             	String key = null;
-            	if (style.equals("A")) {
-                	mapName = "tues";
-                	key = tokens[1] + "-" + tokens[2];
-            	} else {
+            	if (mapNameDefault.equals("")) {
                 	mapName = tokens[1];
                 	key = tokens[2];
+            	} else {
+                	mapName = mapNameDefault;
+                	key = tokens[1] + "-" + tokens[2];
             	}
             	String value = tokens[3];
 
             	if (count % 100 == 0) {
-                	System.out.println(Arrays.asList(tokens));
+                	System.out.println(mapName + " " + Arrays.asList(tokens));
             	}
             	hazelcastInstance.getMap(mapName).set(key, value);
             	count++;
