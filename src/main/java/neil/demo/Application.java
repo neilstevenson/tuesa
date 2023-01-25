@@ -41,6 +41,7 @@ public class Application {
     	System.out.println("START ------------" + new Date());
     	System.out.println("Input: '" + Objects.toString(input) + "'");
     	System.out.println("MapName: '" + Objects.toString(mapNameDefault) + "'");
+    	System.out.println("Map count " + hazelcastInstance.getDistributedObjects().size());
     	File file = new File(input);
     	
         try (BufferedReader bufferedReader =
@@ -74,6 +75,8 @@ public class Application {
         } catch (Exception e) {
         	e.printStackTrace();
         }
+
+    	System.out.println("Map count " + hazelcastInstance.getDistributedObjects().size());
     	System.out.println("END ------------" + new Date());
 		
 		hazelcastInstance.shutdown();
