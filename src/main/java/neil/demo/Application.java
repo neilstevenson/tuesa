@@ -57,8 +57,13 @@ public class Application {
                 	mapName = tokens[1];
                 	key = tokens[2];
             	} else {
-                	mapName = mapNameDefault;
-                	key = tokens[1] + "-" + tokens[2];
+            		if (mapNameDefault.equals(":")) {
+                    	mapName = tokens[1].substring(6, 7);
+                    	key = tokens[2];
+            		} else {
+                    	mapName = mapNameDefault;
+                    	key = tokens[1] + "-" + tokens[2];
+            		}
             	}
             	String value = tokens[3];
 
